@@ -1,29 +1,42 @@
 # OpenOS
 
-OpenOS is an operating-system project built around the principle that users should be able to use, study, modify, and share the software that makes up their system.
+OpenOS is a multi-architecture operating-system project built around software freedom, hardware transparency, and the ability to inspect, modify, rebuild, and share the system.
 
-## Project principles
+## Core principles
 
-- **Open-source software only.** OpenOS aims to include software whose source is available under an OSI-approved open-source license. Proprietary applications and proprietary driver packages are excluded.
-- **No proprietary GPU drivers.** OpenOS will use open graphics drivers rather than closed vendor driver packages.
-- **Open graphics stack first.** Mesa and Vulkan are first-class parts of the graphics platform. RADV is the preferred Vulkan driver for supported AMD Radeon GPUs; Intel's ANV Vulkan driver is also a target.
-- **Respect upstream licenses.** OpenOS's project code is licensed under GNU GPL version 3.0. This does not relicense the Linux kernel or other separately licensed components; each included component retains its own license and notices.
-- **User freedom.** The project favors software and distribution choices that let users inspect, modify, rebuild, and share their systems.
+- **Open-source software only.** Official OpenOS releases include open-source software. Proprietary applications, proprietary drivers, closed-source firmware, and other proprietary binary blobs are excluded.
+- **No binary blobs.** Official releases must not bundle proprietary firmware or other closed binary components, even when excluding them limits hardware functionality.
+- **Best-effort hardware support.** OpenOS does not guarantee that every device or feature will work. Hardware that requires proprietary components may be unsupported or only partially functional.
+- **User freedom.** Users may modify their own installations, including adding components they choose. Such additions are user modifications and do not change the official OpenOS policy.
+- **Vendor cooperation.** Hardware vendors are encouraged to publish open specifications, source code, open firmware, and upstream-compatible drivers.
+- **Respect upstream licenses.** OpenOS project code is licensed under GNU GPL version 3.0. This does not relicense the Linux kernel or other separately licensed components; each component retains its own license and notices.
 
-## Firmware policy
+## Architecture strategy
 
-The policy for firmware files that are distributed only as binaries, without corresponding source code, has not yet been decided. This needs a deliberate decision because some AMD and Intel hardware may require firmware for full functionality. Until that policy is settled, firmware inclusion should be reviewed individually and clearly documented; do not describe binary firmware as open-source software.
+OpenOS is intended to support multiple processor architectures where the operating system can be built and maintained in accordance with its open-source-only and no-binary-blob policies.
 
-## Graphics direction
+- **x86-64:** Support compatible systems without requiring proprietary drivers or firmware.
+- **ARM / AArch64:** Support compatible platforms that meet the same requirements.
+- **RISC-V:** A strategic priority because the RISC-V instruction-set architecture is openly specified. Prefer implementations whose hardware designs and supporting documentation are also openly available.
+- **Other architectures:** Welcome when they can meet the project's openness and maintenance requirements.
 
-- Mesa: core open-source graphics stack.
-- Vulkan: first-class graphics and compute API.
-- RADV: AMD Radeon Vulkan driver.
-- ANV: Intel Vulkan driver.
-- Proprietary NVIDIA drivers and other proprietary GPU driver packages: excluded from OpenOS.
+An open instruction-set architecture does not automatically make every processor implementation open hardware. OpenOS should distinguish open architectural specifications from the openness of an individual chip, board, firmware, and peripheral implementation.
 
-Hardware support must not override the project's open-source software policy. Where hardware requires excluded components, some features may be unavailable.
+## Graphics and hardware support
+
+- Mesa is the core open-source graphics stack.
+- Vulkan is a first-class graphics and compute API.
+- RADV is the AMD Radeon Vulkan driver target.
+- ANV is the Intel Vulkan driver target.
+- Nouveau may be included for NVIDIA hardware only where it can operate without proprietary firmware or other binary blobs.
+- NVIDIA's proprietary driver stack and proprietary firmware are excluded from official OpenOS releases.
+
+The same policy applies across graphics, networking, wireless, storage, processors, motherboards, and other hardware: no proprietary binary components in official releases. Where hardware requires excluded components, functionality may be unavailable. Hardware compatibility is best-effort, not guaranteed.
+
+## Open hardware direction
+
+OpenOS supports the broader goal of an open hardware ecosystem: openly documented interfaces, inspectable designs, modifiable implementations, and vendor cooperation. Prefer hardware whose specifications and implementation can be independently studied and improved.
 
 ## Licensing
 
-The OpenOS project code in this repository is licensed under the GNU General Public License, version 3.0. See [LICENSE](LICENSE). Third-party components are governed by their own upstream licenses.
+The OpenOS project code in this repository is licensed under the GNU General Public License, version 3.0. See [LICENSE](LICENSE). Third-party components remain governed by their own upstream licenses.
