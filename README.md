@@ -40,3 +40,9 @@ OpenOS supports the broader goal of an open hardware ecosystem: openly documente
 ## Licensing
 
 The OpenOS project code in this repository is licensed under the GNU General Public License, version 3.0. See [LICENSE](LICENSE). Third-party components remain governed by their own upstream licenses.
+
+
+## Engineering documents
+
+- [ARCHITECTURE.md](ARCHITECTURE.md) — initial system design and decisions required.
+- [ROADMAP.md](ROADMAP.md) — staged bootable-image and release milestones.
